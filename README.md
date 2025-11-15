@@ -77,7 +77,7 @@ This project uses GitHub Actions for continuous integration:
 
 ## Coverage Badge
 
-![Coverage Status](https://coveralls.io/repos/github/YOUR_USERNAME/YOUR_REPO/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/Hubertinhuilu/sw-testing/badge.svg)](https://coveralls.io/github/Hubertinhuilu/sw-testing)
 
 ## Project Structure
 
