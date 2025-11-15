@@ -106,7 +106,9 @@ describe('toNumber.js - AI-Generated Test Suite', () => {
     });
 
     test('should handle objects with toString', () => {
-      expect(toNumber({ toString: () => '42' })).toBeNaN(); // valueOf takes precedence, returns object
+      // If no valueOf, uses toString
+      expect(toNumber({ toString: () => '42' })).toBe(42);
+      // valueOf takes precedence
       expect(toNumber({ valueOf: () => '42', toString: () => '100' })).toBe(42);
     });
   });

@@ -40,7 +40,6 @@ describe('toNumber.js - Manual Test Suite (Phase 1 Design)', () => {
     test('TC-TONUM-005: Number Input - Negative Zero', () => {
       // Purpose: Verify -0 is preserved (JavaScript distinguishes -0 from 0)
       const result = toNumber(-0);
-      expect(result).toBe(0);
       expect(Object.is(result, -0)).toBe(true);
     });
   });

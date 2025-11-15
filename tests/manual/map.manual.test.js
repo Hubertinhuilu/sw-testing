@@ -28,13 +28,16 @@ describe('map.js - Manual Test Suite', () => {
   describe('Iteratee Parameters', () => {
     test('should pass value, index, and array to iteratee', () => {
       const arr = [10, 20, 30];
-      const mockIteratee = jest.fn(n => n);
-      map(arr, mockIteratee);
+      const callArgs = [];
+      map(arr, (value, index, array) => {
+        callArgs.push({ value, index, array });
+        return value;
+      });
 
-      expect(mockIteratee).toHaveBeenCalledTimes(3);
-      expect(mockIteratee).toHaveBeenCalledWith(10, 0, arr);
-      expect(mockIteratee).toHaveBeenCalledWith(20, 1, arr);
-      expect(mockIteratee).toHaveBeenCalledWith(30, 2, arr);
+      expect(callArgs.length).toBe(3);
+      expect(callArgs[0]).toEqual({ value: 10, index: 0, array: arr });
+      expect(callArgs[1]).toEqual({ value: 20, index: 1, array: arr });
+      expect(callArgs[2]).toEqual({ value: 30, index: 2, array: arr });
     });
 
     test('should map using index', () => {

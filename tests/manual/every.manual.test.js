@@ -43,21 +43,27 @@ describe('every.js - Manual Test Suite', () => {
   describe('Predicate Parameters', () => {
     test('should pass value, index, and array to predicate', () => {
       const arr = [1, 2, 3];
-      const mockPredicate = jest.fn(() => true);
-      every(arr, mockPredicate);
+      const callArgs = [];
+      every(arr, (value, index, array) => {
+        callArgs.push({ value, index, array });
+        return true;
+      });
 
-      expect(mockPredicate).toHaveBeenCalledTimes(3);
-      expect(mockPredicate).toHaveBeenCalledWith(1, 0, arr);
-      expect(mockPredicate).toHaveBeenCalledWith(2, 1, arr);
-      expect(mockPredicate).toHaveBeenCalledWith(3, 2, arr);
+      expect(callArgs.length).toBe(3);
+      expect(callArgs[0]).toEqual({ value: 1, index: 0, array: arr });
+      expect(callArgs[1]).toEqual({ value: 2, index: 1, array: arr });
+      expect(callArgs[2]).toEqual({ value: 3, index: 2, array: arr });
     });
 
     test('should stop iteration on first false', () => {
-      const mockPredicate = jest.fn((n) => n < 3);
-      every([1, 2, 3, 4, 5], mockPredicate);
+      let callCount = 0;
+      every([1, 2, 3, 4, 5], (n) => {
+        callCount++;
+        return n < 3;
+      });
 
       // Should only be called 3 times (1, 2, 3) then stop
-      expect(mockPredicate).toHaveBeenCalledTimes(3);
+      expect(callCount).toBe(3);
     });
   });
 

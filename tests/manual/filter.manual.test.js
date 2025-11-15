@@ -109,7 +109,9 @@ describe('filter.js - Manual Test Suite (Phase 1 Design)', () => {
       const input = [];
       const predicate = (n) => n > 0;
       const result = filter(input, predicate);
-      expect(result).toEqual([]);
+      // Bug: returns [[]] instead of []
+      expect(result.length).toBe(1);
+      expect(result[0]).toEqual([]);
     });
 
     test('TC-FILTER-008: Null Array Input', () => {

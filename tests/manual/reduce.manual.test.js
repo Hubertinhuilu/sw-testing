@@ -104,11 +104,14 @@ describe('reduce.js - Manual Test Suite', () => {
   describe('Iteratee Parameters', () => {
     test('should pass accumulator, value, index, and collection', () => {
       const array = [1, 2, 3];
-      const mockIteratee = jest.fn((acc, val) => acc + val);
-      reduce(array, mockIteratee, 0);
+      const callArgs = [];
+      reduce(array, (acc, val, idx, col) => {
+        callArgs.push({ acc, val, idx, col });
+        return acc + val;
+      }, 0);
 
-      expect(mockIteratee).toHaveBeenCalledTimes(3);
-      expect(mockIteratee).toHaveBeenCalledWith(0, 1, 0, array);
+      expect(callArgs.length).toBe(3);
+      expect(callArgs[0]).toEqual({ acc: 0, val: 1, idx: 0, col: array });
     });
   });
 });
