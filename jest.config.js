@@ -21,7 +21,7 @@ export default {
   ],
 
   // Coverage thresholds (optional - can adjust based on goals)
-  coverageThresholds: {
+  coverageThreshold: {
     global: {
       branches: 70,
       functions: 70,
@@ -29,6 +29,9 @@ export default {
       statements: 70,
     },
   },
+
+  // Inject globals (jest, expect, test, etc.)
+  injectGlobals: true,
 
   // Coverage reporters
   coverageReporters: [
